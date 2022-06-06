@@ -1,0 +1,100 @@
+package UI;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import AppAndParsers.AppManager;
+
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Ingredient extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JButton btnNewButton_1;
+	private String ingredientString;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Ingredient frame = new Ingredient();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 * @param appManager 
+	 * @param appManager 
+	 */
+	public Ingredient(JFrame frame, AppManager appManager) {
+		JFrame fm = new JFrame();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(200, 200, 650, 400);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 250, 240));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Type Ingredient:");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 21));
+		lblNewLabel.setBounds(40, 144, 172, 30);
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(205, 145, 372, 36);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+
+		
+		JButton btnNewButton = new JButton("Get Recipe");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GetRecipe ga = new GetRecipe(appManager);
+				fm.setVisible(false);
+				ga.setVisible(true);
+			}
+		});
+		btnNewButton.setBackground(SystemColor.activeCaption);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton.setBounds(519, 272, 107, 36);
+		contentPane.add(btnNewButton);
+		
+		btnNewButton_1 = new JButton("Choose more options");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ingredientString=textField.getText();
+				frame.setVisible(true);
+				fm.setVisible(false);
+			}
+		});
+		btnNewButton_1.setBounds(481, 318, 145, 35);
+		contentPane.add(btnNewButton_1);
+	}
+	
+	public String getIngredientString() {
+		return ingredientString;
+	}
+
+}
